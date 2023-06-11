@@ -1,18 +1,20 @@
 #include <iostream>
+#include "ArgumentParser.h"
 
 int main(int argc, char* argv[])
 {
-	std::cout << "Argument count: " << argc << std::endl;
-	
-	if (argc < 2)
-	{
-		std::cout << "Please provide the arguments!" << std::endl;
-	}
+	ArgumentParser argParser;
+	argParser.SetFlag("rename");
+	argParser.SetFlag("convert");
+	argParser.SetFlag("resize");
+	argParser.SetFlag("scale");
 
-	for (size_t i = 0; i < argc; i++)
-	{
-		std::cout << "Arg in position " << i << " :" << argv[i] << std::endl;
-	}
+	argParser.Parse(argc, argv);
+
+	std::cout << "rename : " << argParser.GetFlag("rename") << std::endl;
+	std::cout << "convert : " << argParser.GetFlag("convert") << std::endl;
+	std::cout << "resize : " << argParser.GetFlag("resize") << std::endl;
+	std::cout << "scale : " << argParser.GetFlag("scale") << std::endl;
 	
 	return 0;
 }
